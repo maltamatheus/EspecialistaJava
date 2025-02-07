@@ -2,16 +2,19 @@ package br.com.especialistajava.modulo18.collections.agencia;
 
 import java.util.Objects;
 
-public class Hotel {
+public class Hotel implements Comparable<Hotel>{
 
-    private String nome, cidade;
+    private String nome, cidade, nivelClasse;
     private double precoDiaria;
 
-    public Hotel(String nome, String cidade, double precoDiaria) {
+    public Hotel(String nome, String cidade, String nivelClasse, double precoDiaria) {
         this.nome = nome;
         this.cidade = cidade;
+        this.nivelClasse = nivelClasse;
         this.precoDiaria = precoDiaria;
     }
+
+    public Hotel(){}
 
     public String getNome() {
         return nome;
@@ -28,6 +31,14 @@ public class Hotel {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getNivelClasse() {
+        return nivelClasse;
+    }
+
+    public void setNivelClasse(String nivelClasse) {
+        this.nivelClasse = nivelClasse;
     }
 
     public double getPrecoDiaria() {
@@ -47,6 +58,7 @@ public class Hotel {
         return "Hotel{" +
                 "nome='" + nome + '\'' +
                 ", cidade='" + cidade + '\'' +
+                ", nivelClasse='" + nivelClasse + '\'' +
                 ", precoDiaria=" + precoDiaria +
                 '}'+"\n";
     }
@@ -62,5 +74,15 @@ public class Hotel {
     @Override
     public int hashCode() {
         return Objects.hash(nome, cidade);
+    }
+
+
+    @Override
+    public int compareTo(Hotel o) {
+        if (this.getNome().compareTo(o.getNome()) == 0){
+            return this.getCidade().compareTo(o.getCidade());
+        }
+
+        return this.getNome().compareTo(o.getNome());
     }
 }
